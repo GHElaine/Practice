@@ -6,6 +6,20 @@ struct A {
 	int w;
 	int h;
 };
+
+int cmp(const void* a, const void* b) {
+	A* _a = (A*)a;
+	A* _b = (A*)b;
+	if (_a->w < _b->w) {
+		return 1;
+	}
+	else if (_a->w > _b->w) {
+		return -1;
+	}
+	else 
+		return 0;
+}
+
 void add(A *a) {
 	/*for (int i = 0; i < 10; i++) {
 		a[i].w += 3;
@@ -15,7 +29,7 @@ void add(A *a) {
 	b = a;
 	c = b;
 	for (int i = 0; i < 5; i++) {
-		c->w *= 10;
+		c->w *= -1;
 
 		printf("%d::	###h: %d	w: %d\n", i,c[i].h, c[i].w);
 		c++;
@@ -40,6 +54,8 @@ int main() {
 		printf("w: %d	h: %d\n", a[i].w, a[i].h);
 	}
 	add(a);
+	qsort(a, 10, sizeof(A), &cmp);
+	
 	for (int i = 0; i < 10; i++) {
 		printf("##w: %d	h: %d\n", a[i].w, a[i].h);
 	}
